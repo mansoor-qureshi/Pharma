@@ -1,0 +1,24 @@
+.login-page {
+    /* background-image: url('https://img.freepik.com/premium-vector/female-doctor-character-concept-vector-illustration_578300-37.jpg?w=900');  */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-form {
+    padding: 2rem;
+  }
+  
+  .form {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .submit-button {
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+  

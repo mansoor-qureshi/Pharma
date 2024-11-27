@@ -1,0 +1,15 @@
+/* dashboard-style.css */
+
+.cards-container {
+    display: flex;
+    gap: 20px; /* Adjust the gap between cards */
+  }
+  
+  .card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+  

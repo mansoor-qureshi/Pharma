@@ -1,0 +1,32 @@
+.appointments-table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 10px;
+    position: relative; /* Make the container relative to set z-index */
+  }
+  
+  .appointments-table-container thead {
+      position: sticky;
+      top: 0;
+      z-index: 1; /* Ensure the thead stays above tbody */
+  }
+  
+  
+  .appointments-table-container::-webkit-scrollbar {
+    width: 4px;
+    height:4px;
+  }
+  
+  .appointments-table-container::-webkit-scrollbar-thumb {
+    background-color:rgb(20, 20, 143);
+    border-radius: 4px;
+  }
+  
+  .appointments-table-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  
+  .appointments-table-container::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+

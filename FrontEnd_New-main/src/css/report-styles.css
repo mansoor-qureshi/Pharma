@@ -1,0 +1,16 @@
+.report {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the graphs horizontally */
+  }
+  
+  .graph-container {
+    display: flex;
+    justify-content: space-between; /* Distributes the graphs evenly along the horizontal axis */
+  }
+  
+  .graph {
+    flex: 1; /* Allows the graphs to expand and fill the available space */
+    margin: 10px; /* Adds spacing between the graphs */
+  }
+  

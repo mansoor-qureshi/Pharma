@@ -1,0 +1,29 @@
+/* styles.css */
+.phone-input {
+    height: 55px;
+    border: 1px solid gray;
+    padding: 0 10px; /* Adjust padding as needed */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.phone-input input {
+    height: 100%; /* Ensure the input takes up the full height of the container */
+    border: none;
+    outline: none;
+    flex-grow: 1;
+}
+
+.phone-input .PhoneInputCountry {
+    margin-right: 10px; /* Space between country code and input */
+    display: flex;
+    align-items: center;
+}
+
+.phone-input .PhoneInputCountrySelect {
+    border: none;
+    background: none;
+    outline: none;
+}
