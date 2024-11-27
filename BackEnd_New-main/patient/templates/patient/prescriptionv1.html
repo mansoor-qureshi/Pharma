@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=210mm, initial-scale=1.0">
+    <title>Prescription PDF</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            width: 210mm;
+            min-height: 297mm;
+            box-sizing: border-box;
+        }
+
+        .header,
+        .footer {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .header-table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        .header-table td {
+            padding: 5px;
+            font-size: 14px;
+            border: none; /* No border for header table cells */
+        }
+
+        .patient-details-table,
+        .body-details-table,
+        .observation-table,
+        .medicine-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        th {
+            text-align: center;
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .logo img {
+            max-height: 80px;
+            display: block;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <table class="header-table">
+        <tr>
+            <td width="30%">
+                <strong>DR.{{ doctor_details.name }}</strong><br>
+                <span>{{ doctor_details.specialization }}</span><br>
+                <span>{{ doctor_details.department }}</span><br>
+                <span>{{ doctor_details.license }}</span>
+            </td>
+            <td width="40%" class="logo">
+                <img src="{{ logo_path }}" alt="Clinic Logo" />
+            </td>
+            <td width="30%" style="text-align: right;">
+                <strong>{{ org_details.name }}</strong><br>
+                <span>Address:{{ org_details.address.house_no }}, {{ org_details.address.area }}</span><br>
+                <span>{{ org_details.address.city }}, {{ org_details.address.state }}</span><br>
+                <span>GST No: {{ org_details.gst_no }}</span>
+            </td>
+        </tr>
+    </table>
+<hr/>
+    <!-- Patient Details Section -->
+    <div class="section-title">Patient Details</div>
+    <table class="patient-details-table">
+        <tr>
+            <th>Patient ID</th>
+            <td>{{ patient_details.id }}</td>
+            <th>Name</th>
+            <td>{{ patient_details.name }}</td>
+            <th>Age</th>
+            <td>{{ patient_details.age }}</td>
+            <th>Gender</th>
+            <td>{{ patient_details.gender }}</td>
+        </tr>
+        <tr>
+            <th>Mobile</th>
+            <td>{{ patient_details.mobile }}</td>
+            <th>Email</th>
+            <td colspan="5">{{ patient_details.email }}</td>
+        </tr>
+    </table>
+
+    <!-- Body Details Section -->
+    <div class="section-title">Body Details</div>
+    <table class="body-details-table">
+        <tr>
+            <th>Weight</th>
+            <td>{{ body_details.weight }}</td>
+            <th>Temperature</th>
+            <td>{{ body_details.temperature }}</td>
+            <th>Blood Pressure</th>
+            <td>{{ body_details.blood_pressure }}</td>
+        </tr>
+    </table>
+
+    <!-- Clinical Observations and Diagnosis Section -->
+    <div class="section-title">Clinical Observations and Diagnosis</div>
+    <table class="observation-table">
+        <tr>
+            <th>Clinical Observations</th>
+            <td>{{ clinical_observation }}</td>
+        </tr>
+        <tr>
+            <th>Diagnosis</th>
+            <td>{{ diagnosis }}</td>
+        </tr>
+    </table>
+
+    <!-- Prescribed Medicines Section -->
+    <div class="section-title">Prescribed Medicines</div>
+    <table class="medicine-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Medicine</th>
+                <th>Dose</th>
+                <th>When</th>
+                <th>Frequency</th>
+                <th>Duration</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for medicine in prescription_summary %}
+            <tr>
+                <td>{{ medicine.type }}</td>
+                <td>{{ medicine.medicine }}</td>
+                <td>{{ medicine.dose }}</td>
+                <td>{{ medicine.when }}</td>
+                <td>{{ medicine.frequency }}</td>
+                <td>{{ medicine.duration }}</td>
+                <!-- Display blank if notes is None or empty -->
+                <td>{{ medicine.notes|default_if_none:"" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr/>
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>{{ org_details.name }}, {{ org_details.address.city }}, {{ org_details.address.pin_code }}</p>
+    </div>
+
+</body>
+
+</html>
+

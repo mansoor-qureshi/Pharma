@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .invoice {
+        border: 1px solid #000;
+        padding: 20px;
+        max-width: 800px;
+        margin: auto;
+      }
+      .header {
+        text-align: center;
+        border-bottom: 3px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .details,
+      .table-container {
+        width: 100%;
+      }
+      .details td {
+        padding: 5px 10px;
+        vertical-align: top;
+      }
+      .table-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      .table-container th,
+      .table-container td {
+        border: 1px solid #000;
+        padding: 5px;
+        text-align: center;
+      }
+      .totals {
+        margin-top: 10px;
+      }
+      .totals td {
+        text-align: right;
+        padding: 5px 10px;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice">
+      <div class="header">
+        <h1>TAX INVOICE</h1>
+        <p>{{ organization.name }}</p>
+        <p>{{ organization.address.house_no }}, {{ organization.address.area }}, {{ organization.address.city }}, {{ organization.address.state }} - {{ organization.address.pin_code }}</p>
+      </div>
+      <table class="details">
+        <tr>
+          <td>GSTIN: {{ organization.gst_no }}</td>
+          <td style="text-align: right">Ph: {{ organization.mobile_number }}</td>
+        </tr>
+        <tr>
+          <td>Date : {{ date }}</td>
+          <td style="text-align: right">Email : {{ organization.email }}</td>
+        </tr>
+      </table>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Medicine Name</th>
+
+              <th>Qty</th>
+
+              <th>Price / Tablet</th>
+
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in prescription_items %}
+            <tr>
+              <td>{{ item.name }}</td>
+              <td>{{ item.quantity_requested }}</td>
+              <td>{{ item.price_per_unit }}</td>
+              <td>{{ item.total }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <table class="totals">
+        <tr>
+          <td style="width: 92%">Sub Total :</td>
+          <td>₹{{ cost_summary.subtotal }}</td>
+        </tr>
+        <tr>
+            <td>Discount :</td>
+            <td>₹{{ cost_summary.discount_amount }}</td>
+          </tr>
+        <tr>
+          <td>Total CGST :</td>
+          <td>₹{{ cost_summary.CGST.tax_amount }}</td>
+        </tr>
+        <tr>
+          <td>Total SGST :</td>
+          <td>₹{{ cost_summary.SGST.tax_amount }}</td>
+        </tr>
+        <tr>
+          <td>Total Amount :</td>
+          <td>₹{{ cost_summary.Total_amount }}</td>
+        </tr>
+      </table>
+     
+    </div>
+  </body>
+</html>

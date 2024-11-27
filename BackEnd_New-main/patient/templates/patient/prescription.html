@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A4 Sheet</title>
+    <style>
+        body {
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 210mm;
+            min-height: 290mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .page {
+            /* background-color: white;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        .imageBar {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .leftHeader {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            gap: 3px;
+        }
+
+        .rightHeader {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+            gap: 3px;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .mainBody {
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+            padding: 20px;
+            gap: 10px;
+        }
+
+        hr {
+            margin: 10px;
+            border-top: 3px solid #808080;
+        }
+
+        .patientDetails {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .basic-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .basic-details td {
+            border: 2px solid #808080;
+            padding: 8px;
+            text-align: start;
+            font-size: 15px;
+        }
+
+        .prescription {
+            display: flex;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .center-bold {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .clinical-and-diagnosis {
+            flex: 40%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .divider {
+            width: 1px;
+            background-color: gray;
+            left: 40%;
+        }
+
+        .medicines {
+            flex: 60%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            gap: 5px;
+        }
+
+        .clinical,
+        .diagnosis {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .medicines table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .medicines th,
+        td {
+            border: 2px solid #808080;
+            padding: 8px;
+            text-align: start;
+            font-size: 15px;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+
+        footer {
+            background-color: rgb(237, 232, 232);
+            margin-top: 20px;
+            padding: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+        }
+
+        .footer-content .left-section {
+            flex: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .footer-divider {
+            width: 1px;
+            background-color: black;
+            left: 50%;
+        }
+
+        .footer-content .right-section {
+            flex: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="imageBar">
+            <img src="./static/apollo.jpeg" />
+            <img src="./static/apollo.jpeg" />
+        </div>
+        <div class="header">
+            <div class="leftHeader">
+                <span class="text-bold">DR.{{pat_doc.doctor_details.name}}</span>
+                <span>{{pat_doc.doctor_details.department}},{{pat_doc.doctor_details.specialization}}</span>
+                <span>{{pat_doc.doctor_details.license}}</span>
+            </div>
+            <div class="rightHeader">
+                <span class="text-bold">{{pat_doc.org_details.name}}</span>
+                <span>Address:{{pat_doc.org_details.address.house_no}},{{pat_doc.org_details.address.landmark}}</span>
+                <span>{{pat_doc.org_details.address.street}},{{pat_doc.org_details.address.city}}</span>
+                <span>Reg. GST No: {{pat_doc.org_details.gst_no}}</span>
+            </div>
+        </div>
+        <div class="mainBody">
+            <div class="basic-details">
+                <hr>
+                <div class="patientDetails">Patient Details</div>
+                <div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="text-bold">Patient ID</td>
+                                <td>{{pat_doc.patient_details.id}}</td>
+                                <td class="text-bold">Name</td>
+                                <td>{{pat_doc.patient_details.name}}</td>
+                                <td class="text-bold">Age</td>
+                                <td>{{pat_doc.patient_details.age}}</td>
+                                <td class="text-bold">Gender</td>
+                                <td>{{pat_doc.patient_details.gender}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">Weight</td>
+                                <td>{{pat_doc.body_details.weight}}</td>
+                                <td class="text-bold">Temperature</td>
+                                <td>{{pat_doc.body_details.temperature}}</td>
+                                <td class="text-bold">Blood Pressure</td>
+                                <td>{{pat_doc.body_details.blood_pressure}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <table style="margin-top:10px">
+                        <tr>
+                            <td class="text-bold">Mobile</td>
+                            <td colspan="3">{{pat_doc.patient_details.mobile}}</td>
+                            <td class="text-bold">Email</td>
+                            <td colspan="3">{{pat_doc.patient_details.email}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+            </div>
+            <div class="prescription">
+                <div class="clinical-and-diagnosis">
+                    <div class="clinical">
+                        <span class="center-bold">Clinical Observation</span>
+                        <span style="text-align:justify">{{prescription_summary.observations}}</span>
+                    </div>
+                    <div class="diagnosis">
+                        <span class="center-bold">Diagnosis</span>
+                        <span style="text-align:justify">{{prescription_summary.diagnosis}}</span>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="medicines">
+                    <span class="center-bold">Medicines</span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Count</th>
+                                <th>Instructions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for medicine in prescription_summary.medicines %}
+                            <tr>
+                                <td>{{ medicine.name }} </td>
+                                <td>{{ medicine.count }}</td>
+                                <td>{{ medicine.instructions }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <footer>
+        <div class="footer-content">
+            <div class="left-section">
+                <span class="text-bold" style="color: rgb(65, 154, 189);"> Apollo Clinic, Manikonda</span>
+                <span> {{pat_doc.org_details.address.house_no}}, near {{pat_doc.org_details.address.landmark}},
+                    {{pat_doc.org_details.address.street}}
+                </span>
+                <span> {{pat_doc.org_details.address.city}}, {{pat_doc.org_details.address.state}}, {{pat_doc.org_details.address.country}} ,{{pat_doc.org_details.address.pin_code}}</span>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="right-section">
+                <span class="text-bold" style="color: rgb(65, 154, 189);"> Book Your Appointment Today!</span>
+                <span> WhatsApp Number: {{pat_doc.org_details.mobile_number}}</span>
+                <span>Toll Number: 1800 200 200</span>
+                <span>Website: {{pat_doc.org_details.email}}</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
